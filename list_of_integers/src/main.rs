@@ -18,7 +18,7 @@ fn calc_mean(integer_list: &mut Vec<i32>) -> Option<f64> {
 
 // return median from integer_list if integer_list is not empty.
 // return None if integer_list is empty.
-fn calc_median(integer_list: &mut Vec<i32>) -> Option<i32> {
+fn calc_median(integer_list: &mut Vec<i32>) -> Option<f64> {
     if integer_list.len() == 0 {
         return None;
     }
@@ -30,18 +30,18 @@ fn calc_median(integer_list: &mut Vec<i32>) -> Option<i32> {
             let median_index = integer_list.len() / 2;
             let median = integer_list.get(median_index)
                 .expect("Vector's get failed.");
-            Some(*median)
+            Some(*median as f64)
         },
         0 => {
-            let median_index1 = integer_list.len() / 2 - 1;
-            let median_index2 = integer_list.len() / 2;
+            let median_left_index = integer_list.len() / 2 - 1;
+            let median_right_index = integer_list.len() / 2;
 
-            let median_left = integer_list.get(median_index1)
+            let median_left = integer_list.get(median_left_index)
                 .expect("Vector's get failed.");
-            let median_right = integer_list.get(median_index2)
+            let median_right = integer_list.get(median_right_index)
                 .expect("Vector's get failed.");
                 
-            Some((*median_left+*median_right)/2)
+            Some((*median_left+*median_right) as f64 / 2 as f64)
         },
         _ => None,
     }
@@ -101,10 +101,10 @@ fn main() {
     }
 
     if let Some(median) = calc_median(&mut integer_list) {
-        println!("The value of median in the list is {median}.");
+        println!("The value of median of the list is {median}.");
     }
 
     if let Some(modes) = calc_mode(&mut integer_list) {
-        println!("The value(s) of mode in the list is(are) {modes:?}");
+        println!("The value(s) of mode of the list is(are) {modes:?}");
     }
 }
