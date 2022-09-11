@@ -59,10 +59,11 @@ fn calc_mode(integer_list: &Vec<i32>) -> Option<Vec<i32>> {
     Some(frequency_modes_tuple.1)
 }
 
-fn main() {
-    println!("Please enter a space-separated list of integers.");
-
+// return integer_list from stdin input
+fn get_integer_list_from_input() -> Vec<i32> {
     let mut input = String::new();
+
+    println!("Please enter a space-separated list of integers.");
     io::stdin().read_line(&mut input)
         .expect("failed to read_line");
 
@@ -72,6 +73,12 @@ fn main() {
             .expect("input contains a word which cannot be parsed into an integer.");
         integer_list.push(integer);
     }
+
+    integer_list
+}
+
+fn main() {
+    let mut integer_list = get_integer_list_from_input();
 
     if let Some(median) = calc_median(&mut integer_list) {
         println!("The value of median in the list is {median}.");
