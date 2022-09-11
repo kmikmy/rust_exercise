@@ -1,5 +1,21 @@
 use std::{io, collections::HashMap};
 
+// return mean from integer_list if integer_list is not empty.
+// return None if integer_list is empty.
+fn calc_mean(integer_list: &mut Vec<i32>) -> Option<f64> {
+    if integer_list.len() == 0 {
+        return None;
+    }
+
+    let mut sum: i32 = 0;
+    for val in integer_list.iter() {
+        sum += *val;
+    }
+
+    let mean = sum as f64 / integer_list.len() as f64;
+    Some(mean)
+}
+
 // return median from integer_list if integer_list is not empty.
 // return None if integer_list is empty.
 fn calc_median(integer_list: &mut Vec<i32>) -> Option<i32> {
@@ -79,6 +95,10 @@ fn get_integer_list_from_input() -> Vec<i32> {
 
 fn main() {
     let mut integer_list = get_integer_list_from_input();
+
+    if let Some(mean) = calc_mean(&mut integer_list) {
+        println!("The value of mean of the list is {mean}.");
+    }
 
     if let Some(median) = calc_median(&mut integer_list) {
         println!("The value of median in the list is {median}.");
