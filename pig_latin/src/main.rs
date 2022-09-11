@@ -1,6 +1,6 @@
 use std::io;
 
-// return integer_list from stdin input
+// return string list from stdin input
 fn get_word_list_from_input() -> Vec<String> {
     let mut input = String::new();
 
