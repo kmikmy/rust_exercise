@@ -18,12 +18,16 @@ mod company {
     }
 
     impl Command {
-        fn print_employees(department_list: &mut HashMap<String, Vec<String>>) {
+        fn print_employees(employee_list: &Vec<String>) {
+            for employee_name in employee_list {
+                println!("- {employee_name}");
+            }
+        }
+
+        fn print_all_employees(department_list: &mut HashMap<String, Vec<String>>) {
             for (department, employee_list) in department_list {
                 println!("[{department}]");
-                for employee_name in employee_list {
-                    println!("- {employee_name}");
-                }
+                Self::print_employees(employee_list);
                 println!("");
             }
         }
@@ -32,9 +36,7 @@ mod company {
             match department_list.get(&department) {
                 Some(employee_list) => {
                     println!("[{department}]");
-                    for employee_name in employee_list {
-                        println!("- {employee_name}");
-                    }
+                    Self::print_employees(employee_list);
                     println!("");                
                 },
                 None => {
@@ -50,7 +52,7 @@ mod company {
 
         pub fn execute(self, department_list: &mut HashMap<String, Vec<String>>) {
             match self.op {
-                Operation::GetAll => Self::print_employees(department_list),
+                Operation::GetAll => Self::print_all_employees(department_list),
                 Operation::GetDepartment(department) => Self::print_department(department_list, department),
                 Operation::Add(name, department) => Self::add_employee(department_list, name, department),
                 Operation::Invalid => {
