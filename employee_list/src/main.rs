@@ -27,7 +27,7 @@ mod company {
         }
 
         fn print_all_employees(department_list: &HashMap<String, Vec<String>>) {
-            // temporary create a vector to sort HashMap by department name.
+            // temporarily create a vector to sort HashMap by department name.
             let mut department_list_vector: Vec<(&String, &Vec<String>)> = department_list.iter().collect();
             department_list_vector.sort_by(|a, b| a.0.cmp(b.0));
 
@@ -38,6 +38,7 @@ mod company {
             }
         }
 
+        // print employees in a department.
         fn print_department(department_list: &HashMap<String, Vec<String>>, department: String) {
             match department_list.get(&department) {
                 Some(employee_list) => {
@@ -68,6 +69,7 @@ mod company {
             }
         }
 
+        // constructor
         pub fn from(command: Vec<String>) -> Self {
             let first_word = command.get(0);
         
@@ -95,6 +97,7 @@ mod company {
             }
         }
 
+        // constructor for Get command
         fn get_command(command: Vec<String>) -> Self {
             if !Self::is_valid_get_command(&command) {
                 return Self { op: Operation::Invalid }
@@ -120,6 +123,7 @@ mod company {
             }
         }    
 
+        // constructor for Add command
         fn add_command(command: Vec<String>) -> Self {
             if !Self::is_valid_add_command(&command) {
                 return Self { op: Operation::Invalid }
