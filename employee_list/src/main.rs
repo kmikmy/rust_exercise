@@ -19,20 +19,26 @@ mod company {
 
     impl Command {
         fn print_employees(employee_list: &Vec<String>) {
-            for employee_name in employee_list {
+            let mut sorted_list = employee_list.clone();
+            sorted_list.sort();
+            for employee_name in sorted_list {
                 println!("- {employee_name}");
             }
         }
 
-        fn print_all_employees(department_list: &mut HashMap<String, Vec<String>>) {
-            for (department, employee_list) in department_list {
+        fn print_all_employees(department_list: &HashMap<String, Vec<String>>) {
+            // temporary create a vector to sort HashMap by department name.
+            let mut department_list_vector: Vec<(&String, &Vec<String>)> = department_list.iter().collect();
+            department_list_vector.sort_by(|a, b| a.0.cmp(b.0));
+
+            for (department, employee_list) in department_list_vector {
                 println!("[{department}]");
                 Self::print_employees(employee_list);
                 println!("");
             }
         }
 
-        fn print_department(department_list: &mut HashMap<String, Vec<String>>, department: String) {
+        fn print_department(department_list: &HashMap<String, Vec<String>>, department: String) {
             match department_list.get(&department) {
                 Some(employee_list) => {
                     println!("[{department}]");
