@@ -119,6 +119,7 @@ mod company {
                 _ => false,
             }
         }    
+
         fn add_command(command: Vec<String>) -> Self {
             if !Self::is_valid_add_command(&command) {
                 return Self { op: Operation::Invalid }
@@ -134,7 +135,6 @@ mod company {
                 )
             }
         }
-
     }
 }
 
